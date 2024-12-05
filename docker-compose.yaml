@@ -1,0 +1,9 @@
+version: '3'
+services:
+  prom-server:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - D:/PROM_QUEEN/prometheus.yaml:/etc/prometheus/prometheus.yml

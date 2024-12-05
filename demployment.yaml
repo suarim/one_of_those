@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-kuber
+  labels:
+    app: node-kuber
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: node-kuber
+  template:
+    metadata:
+      labels:
+        app: node-kuber
+    spec:
+      containers:
+      - name: node-kuber
+        image: suarim/node-kuber:v3
+        ports:
+        - containerPort: 8000
+        
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-kuber
+spec:
+  selector:
+    app: node-kuber
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+      nodePort: 30001
+  type: NodePort
